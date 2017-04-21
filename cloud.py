@@ -10,7 +10,7 @@ from app import app
 
 engine = Engine(app)
 
-class Todo(Object):
+class Todo2(Object):
     pass
 
 @engine.define
@@ -54,8 +54,9 @@ def _messageReceived(**params):
     print('text:', content)
     processed_content = '12345'
     print('_messageReceived end')
-    TodoFolder = leancloud.Object.extend('TodoFolder')
-    todo_folder = TodoFolder()
+
+    
+    todo_folder = Todo2()
     todo_folder.set('name', '工作')
     todo_folder.set('priority', 1)
     todo_folder.save()
