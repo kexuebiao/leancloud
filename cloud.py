@@ -42,6 +42,16 @@ def _messageReceived(**params):
     #     'sourceIP': '121.239.62.103',
     #     'timestamp': 1472200796764,
     # }
+	    # 可以用继承的方式定义 leancloud.Object 的子类
+	class Todo2(leancloud.Object):
+	    pass
+	# 或者用以下的方式定义子类
+	# Todo = leancloud.Object.extend('Todo')
+	todo = Todo2()
+	todo.set('title', '工程师周会')
+	todo.set('content', '每周工程师会议，周一下午2点')
+	todo.save()
+
     print('_messageReceived start')
     content = json.loads(params['content'])
     print('text:', content)
