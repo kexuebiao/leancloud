@@ -2,6 +2,7 @@
 
 from leancloud import Engine
 from leancloud import LeanEngineError
+from leancloud import Object
 import json
 
 from app import app
@@ -9,6 +10,8 @@ from app import app
 
 engine = Engine(app)
 
+class Todo(Object):
+    pass
 
 @engine.define
 def hello(**params):
@@ -43,20 +46,19 @@ def _messageReceived(**params):
     #     'timestamp': 1472200796764,
     # }
 	    # 可以用继承的方式定义 leancloud.Object 的子类
-	class Todo2(leancloud.Object):
-	    pass
 	# 或者用以下的方式定义子类
 	# Todo = leancloud.Object.extend('Todo')
-	todo = Todo2()
-	todo.set('title', '工程师周会')
-	todo.set('content', '每周工程师会议，周一下午2点')
-	todo.save()
 
     print('_messageReceived start')
     content = json.loads(params['content'])
     print('text:', content)
     processed_content = '12345'
     print('_messageReceived end')
+    TodoFolder = leancloud.Object.extend('TodoFolder')
+    todo_folder = TodoFolder()
+    todo_folder.set('name', '工作')
+    todo_folder.set('priority', 1)
+    todo_folder.save()
     # 必须含有以下语句给服务端一个正确的返回，否则会引起异常
     return {
         'content': processed_content,
