@@ -44,8 +44,7 @@ def _messageReceived(**params):
     # }
     print('_messageReceived start')
     content = json.loads(params['content'])
-    text = content._lctext
-    print('text:', text)
+    print('text:', content)
     processed_content = '12345'
     print('_messageReceived end')
     # 必须含有以下语句给服务端一个正确的返回，否则会引起异常
